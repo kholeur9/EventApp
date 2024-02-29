@@ -1,0 +1,61 @@
+{% extends 'participant.html' %}
+{% load static %}
+
+{% block title %}Evenement | Catégory {% endblock %}
+
+{% block content %}
+<div class="w-full flex flex-row px-[20px] mt-[10px] items-center gap-2.5 mb-[20px]">
+<h1 class="font-[700] text-[22px]">{{ categorie.name|truncatechars:20 }}</h1>
+<span class="text-[20px] font-[600] text-gray-600">( {{ events.count }} )</span>
+</div>
+<div class="w-full flex flex-col px-[20px] h-full">
+  {% if events %}
+  {% for event_by_category in events %}
+  <a href="{% url 'evenement:detail_event' event_by_category.id %}">
+  <div class="w-full h-[120px] flex flex-row my-[10px] gap-2">
+    <div class="w-auto h-full">
+      <div class="w-[120px] h-full rounded-lg overflow-hidden">
+        <img src="{{ event_by_category.image.url }}" alt="{{ event_by_category.title }}" class="w-full h-full object-cover"/>
+      </div>
+    </div>
+    <div class="w-[90%] h-full flex flex-col">
+      <div class="w-full flex flex-col items-start">
+        <p class="text-[10px] text-gray-600 text-start">Début : {{ event_by_category.start_datetime|date:'l, d F Y' }} {{  event_by_category.start_datetime|date:'H:i' }}
+        </p>
+        <p class="text-[10px] text-gray-600 text-start">Fin : {{ event_by_category.end_datetime|date:'l, d F Y' }} {{ event_by_category.end_datetime|date:'H:i' }}
+        </p>
+      </div>
+      <h2 class="text-[14px] font-[600] mt-1.5">{{ event_by_category.title }}</h2>
+      <h3 class="text-[14px] font-[600]">Par : {{ event_by_category.organisator }}</h3>
+      <p class="text-[12px] text-gray-800 text-start font-[600] mb-2">Nombres de place : {{ event_by_category.capacity }}</p>
+      {% if event_by_category.status == 'confirmé' %}
+      <p class="flex flex-row items-center gap-0.5 text-[14px] text-green-500 text-start font-[700]">
+        <i class="fa fa-circle-check"></i>
+        {{ event_by_category.status }}
+      </p>
+      {% elif event_by_category.status == 'annuler' %}
+      <p class="flex flex-row items-center gap-0.5 text-[14px] text-red-500 text-start font-[700]">
+        <i class="fa fa-circle-xmark"></i>
+        {{ event_by_category.status }}
+      </p>
+      {% elif event_by_category.status == 'en_cours' %}
+      <p class="flex flex-row items-center gap-0.5 text-[14px] text-orange-500 text-start font-[700]">
+        <i class="fa fa-circle-pause"></i>
+        {{ event_by_category.status }}
+      </p>
+      {% else %}
+      <p class="flex flex-row items-center gap-0.5 text-[14px] text-orange-500 text-start font-[700]">
+        <i class="fa fa-circle-time"></i>
+        {{ event_by_category.status }}
+      </p>
+      {% endif %}
+    </div>
+  </div>
+  </a>
+  {% endfor %}
+  {% else %}
+  <p class="font-[800] text-gray-700 text-[20px] text-center mt-[30px]">Aucun événement dans cette catégorie</p>
+  <p class="text-gray-600 text-[12px] ext-center">Tous les événements associés à une catégorie apparaîtront ici</p>
+  {% endif %}
+</div>
+{% endblock %}

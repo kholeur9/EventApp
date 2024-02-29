@@ -35,3 +35,8 @@ def favoris(request):
 def category(request):
   categories = Categorie.objects.all()
   return render(request, 'category.html', {'categories': categories})
+
+def events_by_category(request, category_id):
+  categorie = Categorie.objects.get(pk=category_id)
+  events = Event.objects.filter(category=categorie, is_sold_out=False)
+  return render(request, 'events_by_category.html', {'events': events, 'categorie': categorie})

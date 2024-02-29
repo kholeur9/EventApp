@@ -6,12 +6,12 @@
 {% block content %}
 <div class="w-full flex flex-row px-[20px] my-[10px] items-center gap-2.5 mb-[20px]">
 <img src="{% static 'img/categorie.png' %}" class="w-[35px] h-[35px]"/>
-<h1 class="font-[700] text-[28px]">Catégories</h1>
+<h1 class="font-[700] text-[28px]">Toutes les catégories</h1>
 </div>
 <div class="px-[20px] w-full grid grid-cols-2 gap-2">
   {% for categorie in categories %}
   <div class="">
-    <a href="">
+    <a href="{% url 'evenement:events_by_category' categorie.id %}">
       <div class="flex flex-col rounded-lg p-2.5 bg-white border border-1 border-gray-200 items-center">
         <i class="fa fa-graduation-cap text-gray-400 text-xl p-1.5 bg-gray-300 rounded-full w-[50px] h-[50px]"></i>
         <div class="flex flex-col items-center">
