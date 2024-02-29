@@ -4,50 +4,20 @@
 {% block title %}Evenement | Participant{% endblock %}
 
 {% block content %}
-
-<section class="w-full h-full my-[10px] flex flex-col">
-  <div class="w-full h-auto px-[10px] rounded-lg overflow-hidden">
+<section class="w-full mb-[10px] px-[20px] flex flex-row">
+  <ul class="w-full flex flex-row items-center gap-2 text-[14px] text-gray-600">
+    <li class="w-full flex flex-row items-center gap-1.5">
+      <i class="fa fa-home"></i>
+      <a href="{% url 'participant:home_view' %}" class="hover:text-[#ff0000]">Accueil</a>
+    </li>
+  </ul>
+</section>
+<section class="w-full h-full my-[10px] px-[20px] my-[10px] flex flex-col divide-b-1 mb-[20px]">
+  <div class="w-full h-full my-[10px] rounded-lg overflow-hidden">
     <img src="{{ event.image.url }}" alt="{{ event.title }}" class="w-full h-full object-center"/>
   </div>
-  <div class="w-full h-full flex flex-col items-center justify-between p-[20px]">
-    <div class="w-full flex flex-row items-center justify-between">
-      <h1 class="text-gray-800 text-[20px] font-[700]">{{ event.title }}</h1>
-      {% if is_favoris %}
-      <div class="">
-        <a href="{% url 'evenement:favoris_add' event.id %}">
-        <i class="fa fa-heart text-[#FF0000] text-[20px]"></i>
-         </a>
-      </div>
-      {% else %}
-      <div class="">
-        <a href="{% url 'evenement:favoris_add' event.id %}">
-          <i class="fa-regular fa-heart text-white text-[20px]"></i>
-        </a>
-      </div>
-      {% endif %}
-    </div>
-    <div class="w-full">
-      <p class="text-gray-800 text-[16px] font-[400]">{{ event.organisator }}</p>
-    </div>
-    <div class="w-full">
-      <p class="Organisation : text-gray-800 text-[16px] font-[400]">{{ event.description }}</p>
-    </div>
-    <div class="w-full">
-      <h2 class="text-gray-800 font-[700] text-[20px]">Lieu : {{ event.location }}</h2>
-    </div>
-    <div class="w-full flex flex-col px-[10px] py-[5px]">
-      <span class="text-gray-800 font-[700] text-[20px]"><i class="fa-regular fa-calendar"></i> Date</span>
-      <span class="text-gray-600 text-[16px] font-[500]">
-        Début : {{ event.start_datetime|date:'l d F Y' }} à {{ event.start_datetime|date:'H:i' }}
-      </span>
-      <span class="text-gray-700 text-[16px] font-[500]">
-        Fin : {{ event.end_datetime|date:'l d F Y' }} à {{ event.end_datetime|date:'H:i' }}
-      </span>
-    </div>
-  </div>
-</section>
 
-<section class="my-[10px] px-[20px] flex flex-col">
+  <div class="mb-[20px]">
   {% for ticket in tickets %}
   <a href="">
   <div class="w-full flex flex-row rounded-lg">
@@ -63,6 +33,44 @@
   </a>
   {% endfor %}
   <p class="text-[12px] text-[#FF0000]">Condition : Argent remboursable sur annulation de l'événement.</p>
+  </div>
+  
+  <div class="w-full h-full flex flex-col items-center justify-between">
+    <div class="w-full flex flex-row items-center justify-between">
+      <h1 class="text-[#000000] text-[20px] font-[600]">{{ event.title }}</h1>
+      {% if is_favoris %}
+      <div class="">
+        <a href="{% url 'evenement:favoris_add' event.id %}">
+        <i class="fa fa-heart text-[#FF0000] text-[20px]"></i>
+         </a>
+      </div>
+      {% else %}
+      <div class="">
+        <a href="{% url 'evenement:favoris_add' event.id %}">
+          <i class="fa-regular fa-heart text-gray-700 font-[400] text-[20px]"></i>
+        </a>
+      </div>
+      {% endif %}
+    </div>
+    <div class="w-full mt-[10px]">
+      <p class="text-[#000000] text-[18px] font-[600]">Organisation : {{ event.organisator }}</p>
+    </div>
+    <div class="w-full mt-[10px]">
+      <p class="text-[#000000] text-[14px] font-[200]">{{ event.description }}</p>
+    </div>
+    <div class="w-full mt-[10px]">
+      <h2 class="text-[#000000] font-[600] text-[20px]">Lieu : {{ event.location }}</h2>
+    </div>
+    <div class="w-full mt-[10px] mb-[20px] flex flex-col">
+      <span class="text-gray-600 font-[600] text-[20px]"><i class="fa-regular fa-calendar-days text-[20px]"></i> Date</span>
+      <span class="text-gray-700 text-[14px] font-[400]">
+        Début : {{ event.start_datetime|date:'l d F Y' }} à {{ event.start_datetime|date:'H:i' }}
+      </span>
+      <span class="text-gray-700 text-[14px] font-[400]">
+        Fin : {{ event.end_datetime|date:'l d F Y' }} à {{ event.end_datetime|date:'H:i' }}
+      </span>
+    </div>
+  </div>
 </section>
 <section class="my-[10px] px-[20px]">
   <h2 class="text-[18px] font-[600]">Evenements de la même catégorie</h2>

@@ -3,8 +3,7 @@
 {% block title %}Accueil | Participant{% endblock %}
 
 {% block content %}
-{% include 'navigation.html' %}
-<section class="my-[10px] px-[20px] flex flex-col">
+<section class="mt-[10px] px-[20px] flex flex-col">
   {% if participant.user.first_name %}
 <h1 class="font-[700] text-[20px]">Salut, {{ participant.user.first_name }}</h1>
   {% else %}
@@ -12,13 +11,14 @@
   <span class="text-[12px]">Informations très importantes, <a href="{% url 'participant:profile-user' %}" class="underline text-[#ff0000]">cliquez-ici.</a></span>
   {% endif %}
 </section>
-<div class="my-[10px]">
-  <h1 class="text-[20px] font-[600] text-gray-600 ml-[20px]">Événements confirmés</h1>
+{% include 'navigation.html' %}
+<div class="my-[20px]">
+  <h1 class="text-[20px] font-[600] text-[#000000] ml-[20px]">Événements confirmés</h1>
   <div class="swiper w-full">
     
     <div class="swiper-wrapper">
       {% for event in events_confirmed %}
-      <div class="swiper-slide w-[300px] ml-[20px]">
+      <div class="swiper-slide w-[300px] ml-[10px]">
         
         <div class="flex flex-col mt-[10px]">
           <p class="text-[12px] text-[#ff0000] font-[500] my-0">{{ event.start_datetime|date:'l d F Y'|upper }}. {{ event.start_datetime|date:'H:i' }}
@@ -36,7 +36,7 @@
               <span class="font-[600]">{{ event.title }}</span>
               <span class="text-[12px]">Organiser par : {{ event.organisator }}</span>
             </div>
-            <a href="{% url 'evenement:detail_event' event.id %}" class="z-10 py-[5px] px-[10px] font-[600] rounded-full bg-gray-400 text-white text-[14px] flex items-center">Voir plus</a>
+            <a href="{% url 'evenement:detail_event' event.id %}" class="z-10 py-[5px] px-[10px] font-[600] rounded-full bg-[#F4F4F4] text-[#000000] text-[14px] flex items-center">Voir plus</a>
         </div>
       </div>
       </div>
@@ -44,6 +44,25 @@
     </div>
   </div>
 </div>
+<section class="w-full my-[20px] px-[20px] flex flex-col">
+  <h1 class="text-[20px] font-[600] text-[#000000]">Organisations pour vous</h1>
+  <div class="w-full grid grid-cols-2 my-[10px] gap-2">
+    {% for organisation in organisations %}
+    <div class="w-auto h-auto flex flex-col rounded-lg bg-white border border-1 border-gray-200 items-center gap-2.5">
+      <div class="w-full h-[150px] overflow-hidden">
+        <img src="{{ organisation.image.url }}" alt="{{ organisation.name }}" }} class="w-full h-full object-contain"/>
+      </div>
+      <div class="w-full flex flex-col p-[10px] gap-2.5">
+        <p class="flex w-full text-start font-[600]">{{ organisation.nom }}</p>
+        <p class="text-[14px] text-[#000000] font-[400]">0 abonné(e)s</p>
+        <a href="" class="w-full bg-[#FF0000] text-white text-[14px] font-[600] flex items-center justify-center px-[10px] py-[5px] rounded-md">
+      Suivre
+        </a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
 
 {% endblock %}
 

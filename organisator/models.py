@@ -6,7 +6,14 @@ import uuid
 class Organisation(models.Model):
   nom = models.CharField(max_length=50)
   description = models.TextField()
+  image = models.ImageField(upload_to='organisator_images')
+  created_at = models.DateTimeField(auto_now_add=True)
+  updated_at = models.DateTimeField(auto_now=True)
   createur = models.ForeignKey(User, on_delete=models.CASCADE, related_name='organisations_crees', null=True, blank=True)
+
+  class Meta:
+    ordering = ['nom',]
+    verbose_name_plural = "Organisations"
 
   def __str__(self):
     return self.nom
@@ -27,6 +34,8 @@ class Organisateur(models.Model):
   photo = models.ImageField(upload_to='organisateurs', blank=True)
   organisations_crees = models.ManyToManyField(Organisation, related_name='organisateurs')
   organisations_affiliees = models.ManyToManyField(Organisation, related_name='organisateurs_affiliees')
+  created_at = models.DateTimeField(auto_now_add=True)
+  updated_at = models.DateTimeField(auto_now=True)
 
   USERNAME_FIELD = 'email'
 

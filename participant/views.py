@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 
 from .models import Participant
 from evenement.models import Event
+from organisator.models import Organisation
 
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login as django_login
@@ -93,7 +94,8 @@ def home_view(request):
   user = request.user
   participant = Participant.objects.get(user=user)
   events_confirmed = Event.objects.filter(status='confirmé')
-  return render(request, 'profile.html', {'user': user, 'participant': participant, 'events_confirmed': events_confirmed})
+  organisations = Organisation.objects.all()
+  return render(request, 'profile.html', {'user': user, 'participant': participant, 'events_confirmed': events_confirmed, 'organisations': organisations})
 
 @login_required
 def profile_user(request):
