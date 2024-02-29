@@ -1,0 +1,43 @@
+{% extends 'participant.html' %}
+{% load static %}
+
+{% block title %}Evenement | Favoris{% endblock %}
+
+{% block content %}
+<div class="w-full flex flex-row px-[20px] my-[10px] items-center gap-2.5 mb-[20px]">
+<img src="{% static 'img/ajouter-aux-favoris.png' %}" class="w-[35px] h-[35px]"/>
+<h1 class="font-[700] text-[28px]">Favoris</h1>
+<span class="text-[20px] font-[600] text-gray-600">( {{ favoris.count }} )</span>
+</div>
+<div class="w-full flex flex-col px-[20px] h-full">
+  {% if favoris %}
+  {% for favorie in favoris %}
+  <a href="{% url 'evenement:detail_event' favorie.event.id %}">
+  <div class="w-full h-[120px] flex flex-row my-[10px] gap-2">
+    <div class="w-auto h-full">
+      <div class="w-[120px] h-full rounded-lg overflow-hidden">
+        <img src="{{ favorie.event.image.url }}" alt="{{ favorie.event.title }}" class="w-full h-full object-cover"/>
+      </div>
+    </div>
+    <div class="w-[90%] h-full flex flex-col">
+      <div class="w-full flex flex-col items-start">
+        <p class="text-[10px] text-gray-600 text-start">Début : {{ favorie.event.start_datetime|date:'l, d F Y' }} {{ favorie.event.start_datetime|date:'H:i' }}
+        </p>
+        <p class="text-[10px] text-gray-600 text-start">Fin : {{ favorie.event.end_datetime|date:'l, d F Y' }} {{ favorie.event.end_datetime|date:'H:i' }}
+        </p>
+      </div>
+      <h2 class="text-[14px] font-[600] mt-1.5">{{ favorie.event.title }}</h2>
+      <p class="text-[12px] text-gray-800 text-start font-[600] mb-2">Nombre de places : {{ favorie.event.capacity }}</p>
+      <a href="{% url 'evenement:favoris_add' favorie.event.id %}" class="w-full flex flex-col items-center justify-center p-1.5 border border-1 border-red-500 text-[#FF0000] rounded-lg">
+          retirer des favoris
+      </a>
+    </div>
+  </div>
+  </a>
+  {% endfor %}
+  {% else %}
+  <p class="font-[800] text-gray-700 text-[20px] text-center mt-[30px]">Vous n'avez pas ajouter de favoris</p>
+  <p class="text-gray-600 text-[12px] ext-center">Tous les événements que vous mettrez en favoris apparaîtrons ici</p>
+  {% endif %}
+</div>
+{% endblock %}

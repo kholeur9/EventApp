@@ -1,0 +1,135 @@
+{% extends "event.html" %}
+{% load static %}
+
+{% block content %}
+<!-- First Section -->
+<section class="relative h-auto">
+  <!-- Mask black -->
+  <div class="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center opacity-25 bg-[#000]"></div>
+
+  <!-- Image for the first section -->
+  <img src="{% static 'img/affiche.jpeg' %}" alt="event image" class="w-full h-full object-cover" />
+
+  <!-- Container for the first section -->
+  <div class="absolute flex flex-col w-full h-full top-0 justify-between">
+    
+    <div class="flex flex-row items-center justify-center mt-[20px]">
+      <img src="{% static 'img/event.svg' %}" alt="event logo" class="w-[300px] h-[100px] object-cover" />
+    </div>
+  
+    <div class="relative w-full flex flex-col px-[20px] pt-2.5 pb-[20px]">
+      
+      <h1 class="text-white font-black text-start flex flex-col text-[30px] z-50">
+        <span class="text-shadow-lg">L'accès simplifié,</span>
+        <span>Aux évènements.</span>
+      </h1>
+      <div class="grid grid-cols-2 mt-[10px] z-50 gap-[10px]">
+        <a href="{% url 'organisator:etape-1' %}" class="outline-none z-50">
+          <div class="p-[10px] rounded-lg flex flex-col items-center justify-center bg-[#FF0000] text-white">
+            <span class="material-symbols-outlined text-[35px]">
+            event_upcoming
+            </span>
+            <span class="text-white font-[600]">
+            Organisateur
+            </span>
+            <span class="text-[10px] text-center">
+              Accéder et organiser vos événements.
+            </span>
+          </div>
+        </a>
+        <a href="{% url 'participant:login_view' %}" class="outline-none z-50">
+          <div class="p-[10px] rounded-lg flex flex-col items-center justify-center bg-[#FF0000] text-white">
+            <i class="fa-solid fa-ticket text-[35px]"></i>
+            <span class="text-white font-[600]">
+            Participant
+            </span>
+            <span class="text-[10px] text-center">
+              Accéder et participer aux événements.
+            </span>
+          </div>
+        </a>
+      </div>
+      
+      <div class="absolute w-full h-full top-0 left-0 right-0 bottom-0 bg-black opacity-50">
+      </div>
+      
+    </div>
+  <!-- End container for the first section-->
+    
+  </div>
+</section>
+<!-- End First Section -->
+
+<!-- Secind section -->
+<section class="bg-red-100">
+  <div class="px-[20px] py-[15px] w-full">
+    <h1 class="text-[25px] font-bold text-[#343A40]">Nous ?</h1>
+    <blockquote class="my-[10px] text-[17px] font-[600] text-[#343A40]">
+      <span class="text-[#FF0000] text-[23px]">“ </span>Nous avons créé cette application avec une vision claire: simplifier et moderniser l'expérience d'achat de billets pour vos événements préférés. Notre engagement envers la technologie et l'innovation vise à faciliter la vie des organisateurs et des participants.<span class="text-[#FF0000] text-[23px]"> ”</span><br />
+      <cite class="text-[14px] font-normal">Yann Wilfried MOUTSINGA, Fondateur de Event.</cite>
+    </blockquote>
+  </div>
+</section>
+
+<section class="bg-[#F5F5F5]">
+  <div class="px-[20px] py-[15px] w-full">
+    <h1 class="text-[25px] font-bold text-[#343A40]">Raisons de travailler ensemble.</h1>
+    <ul class="grid gap-2.5 grid-cols-1">
+      <ol class="text-[17px] text-[#343A40]">
+        <li class="flex flex-col items-start my-2.5 text-[#343A40] mr-[25px]">
+          <span class="text-[16px] font-[600] text-[#343A40]">
+            1 - Billets Numériques Pratiques
+          </span>
+          <div class="flex flex-row items-start gap-[10px] my-2.5">
+            <i class="fa-regular fa-circle-check text-[20px] font-[600] text-[#343A40]">
+            </i>
+            <p class="text-[14px] text-[#343A40]">Adieu les soucis liés aux billets physiques. Grâce à notre application, les participants peuvent accéder à leurs billets directement depuis leur téléphone, facilitant ainsi l'entrée aux événements.</p>
+          </div>
+        </li>
+        <li class="flex flex-col items-end my-2.5 text-[#343A40] ml-[25px]">
+          <span class="text-[16px] font-[600] text-[#343A40]">
+            2 - Economies et Durabilité
+          </span>
+          <div class="flex flex-row items-start gap-[10px] my-2.5">
+            <i class="fa-regular fa-circle-check text-[20px] font-[600] text-[#343A40]">
+            </i>
+            <p class="text-[14px] text-[#343A40]">Fini les coûts liés à l'impression de billets physiques. Nous favorisons une approche écoresponsable en éléminant le besoin de billets papier, contribuant ainsi à la préservation de l'environnement.</p>
+          </div>
+        </li>
+        <li class="flex flex-col items-start my-2.5 text-[#343A40] mr-[25px]">
+          <span class="text-[16px] font-[600] text-[#343A40]">
+            3 - sécurité et contrôle
+          </span>
+          <div class="flex flex-row items-start gap-[10px] my-2.5">
+            <i class="fa-regular fa-circle-check text-[20px] font-[600] text-[#343A40]"></i>
+            <p class="text-[14px] text-[#343A40]">Notre système de billetterie numérique intègre des fonctionnalités de sécurité avancées, garantissant une entrée fluide et réduisant les risques de contrefaçon.</p>
+          </div>
+        </li>
+        <li class="flex flex-col items-end my-2.5 text-[#343A40] ml-[25px]">
+          <span class="text-[16px] font-[600] text-[#343A40]">
+            4 - Gestion Facile pour les Organisateurs
+          </span>
+          <div class="flex flex-row items-start gap-[10px] my-2.5">
+            <i class="fa-regular fa-circle-check text-[20px] font-[600] text-[#343A40]"></i>
+            <p class="text-[14px] text-[#343A40]">Les organisateurs peuvent créer, personnaliser et gérer leurs événements en quelques clics. Notre interface conviviale offre un contrôle total sur la billetterie et la communication avec les participants.</p>
+          </div>
+        </li>
+        <li class="flex flex-col items-start my-2.5 text-[#343A40] mr-[25px]">
+          <span class="text-[16px] font-[600] text-[#343A40]">
+            5 - Expérience Utilisateur Améliorée
+          </span>
+          <div class="flex flex-row items-start gap-[10px] my-2.5">
+            <i class="fa-regular fa-circle-check text-[20px] font-[600] text-[#343A40]"></i>
+            <p class="text-[14px] text-[#343A40]">Nous mettons l'accent sur une expérience utilisateur fluide. Naviguez facilement, découvrez des événements passionnants et achetez vos billets en toute simplicité.</p>
+          </div>
+        </li>
+      </ol>
+    </ul>
+  </div>
+</section>
+
+<section>
+  
+</section>
+
+{% endblock %}

@@ -1,0 +1,90 @@
+{% extends 'participant.html' %}
+{% load static %}
+
+{% block title %}Evenement | Participant{% endblock %}
+
+{% block content %}
+
+<section class="w-full h-full my-[10px] flex flex-col">
+  <div class="w-full h-auto px-[10px] rounded-lg overflow-hidden">
+    <img src="{{ event.image.url }}" alt="{{ event.title }}" class="w-full h-full object-center"/>
+  </div>
+  <div class="w-full h-full flex flex-col items-center justify-between p-[20px]">
+    <div class="w-full flex flex-row items-center justify-between">
+      <h1 class="text-gray-800 text-[20px] font-[700]">{{ event.title }}</h1>
+      {% if is_favoris %}
+      <div class="">
+        <a href="{% url 'evenement:favoris_add' event.id %}">
+        <i class="fa fa-heart text-[#FF0000] text-[20px]"></i>
+         </a>
+      </div>
+      {% else %}
+      <div class="">
+        <a href="{% url 'evenement:favoris_add' event.id %}">
+          <i class="fa-regular fa-heart text-white text-[20px]"></i>
+        </a>
+      </div>
+      {% endif %}
+    </div>
+    <div class="w-full">
+      <p class="text-gray-800 text-[16px] font-[400]">{{ event.organisator }}</p>
+    </div>
+    <div class="w-full">
+      <p class="Organisation : text-gray-800 text-[16px] font-[400]">{{ event.description }}</p>
+    </div>
+    <div class="w-full">
+      <h2 class="text-gray-800 font-[700] text-[20px]">Lieu : {{ event.location }}</h2>
+    </div>
+    <div class="w-full flex flex-col px-[10px] py-[5px]">
+      <span class="text-gray-800 font-[700] text-[20px]"><i class="fa-regular fa-calendar"></i> Date</span>
+      <span class="text-gray-600 text-[16px] font-[500]">
+        Début : {{ event.start_datetime|date:'l d F Y' }} à {{ event.start_datetime|date:'H:i' }}
+      </span>
+      <span class="text-gray-700 text-[16px] font-[500]">
+        Fin : {{ event.end_datetime|date:'l d F Y' }} à {{ event.end_datetime|date:'H:i' }}
+      </span>
+    </div>
+  </div>
+</section>
+
+<section class="my-[10px] px-[20px] flex flex-col">
+  {% for ticket in tickets %}
+  <a href="">
+  <div class="w-full flex flex-row rounded-lg">
+    <div class="w-2/3 flex flex-col items-center justify-center p-2.5 text-white rounded-lg rounded-r-xl bg-[#ff0000] border-dashed border-r-2 border-white">
+      <p class="text-[18px] font-[600]">Réservation du billet</p>
+      <p class="flex items-center gap-2">Cliquer pour reserver<i class="fa-regular fa-hand-pointer text-[20px]"></i></p>
+    </div>
+    <div class="w-1/3 flex flex-col rounded-lg rounded-l-xl items-center justify-center p-2.5 text-white bg-[#FF0000]">
+      <span>Prix</span>
+      <p class="text-center text-[18px] font-[600]">{{ ticket.price }} FCFA</p>
+    </div>
+  </div>
+  </a>
+  {% endfor %}
+  <p class="text-[12px] text-[#FF0000]">Condition : Argent remboursable sur annulation de l'événement.</p>
+</section>
+<section class="my-[10px] px-[20px]">
+  <h2 class="text-[18px] font-[600]">Evenements de la même catégorie</h2>
+  {% if not idem_category %}
+  <p class="mt-[20px] text-center text-[20px] font-[600]">Auncun événements similaires</p>
+  {% else %}
+  <div class="my-[10px] grid grid-cols-2 gap-2">
+    {% for event in idem_category %}
+    <a href="">
+      <div class="gap-2">
+        <div class="w-full h-full rounded-lg overflow-hidden">
+          <img src="{{ event.image.url }}" alt="{{ event.title }}" class="w-full h-full object-cover"/>
+        </div>
+        <p class="text-[16px] font-[600] text-gray-800">{{ event.title }}</p>
+        <p class="text-[16px] text-gray-800"><i class="fa fa-map-marker"></i> {{ event.location }}</p>
+        <p class="text-[12px] text-[800]"><i class="fa-regular fa-calendar"></i> {{ event.start_datetime|date:'l'|upper }}. {{ event.start_datetime|date:'H:i' }} - {{ event.end_datetime|date:'l'|upper }}. {{ event.end_datetime|date:'H:i' }}</p>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+  {% endif %}
+</section>
+
+<script src="{% static 'participant/js/favoris.js' %}"></script>
+{% endblock %}

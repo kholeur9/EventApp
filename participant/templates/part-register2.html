@@ -1,0 +1,106 @@
+{% extends 'event.html' %}
+{% load static %}
+
+{% block title %}Particiant|Secure Compte{% endblock %}
+
+{% block content %}
+<style>
+  .form-control {
+    width: 100%;
+    border-radius: 13px;
+    border: 1px solid #eee;
+    height: 50px;
+  }
+  .loader {
+  margin: 10px 0;
+  width: 35px;
+  height: 35px;
+  border: 4px solid #FF0000;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: none;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+  }
+
+  @keyframes rotation {
+  0% {
+      transform: rotate(0deg);
+     }
+  100% {
+      transform: rotate(360deg);
+     }
+  }
+</style>
+
+<div class="flex flex-col px-[20px] gap-6 h-screen">
+  <section>
+  <div class="w-full h-[60px] flex flex-row items-center py-[20px] font-[600] text-[15px]">
+    <a href="{% url 'participant:register' %}">
+      <i class="fa fa-arrow-left text-[#343A40] text-[20px] rounded-full"></i>
+    </a>
+  </div>
+  <div class="w-[100px] h-[80px]">
+    <img src="{% static 'img/logo-event.svg' %}" alt="Logo Event" class="w-full h-full object-cover border-1 border-black"/>
+  </div>
+  <h1 class="text-[#343A40] text-[28px] font-[800]">Mots de passe.</h1>
+  </section>
+
+  <section class="">
+    <form method="post" class="flex flex-col items-center w-full" id="form">
+      {% csrf_token %}
+      <div class="flex flex-col gap-2.5 w-full">
+        {% if error %}
+        <p class="text-[#FF0000] font-[700] text-[12px] text-center pt-1.5">
+          {{ error }}
+        </p>
+        {% endif %}
+
+        <div class="w-full flex flex-col pt-1">
+          <label for="email" class="text-[#343A40] text-[12px] font-[500]">Votre mot de passe</label>
+          {{ form.password1 }}
+        </div>
+
+        <div class="w-full flex flex-col pt-1">
+          <label for="email" class="text-[#343A40] text-[12px] font-[500]">Confirmer le mot de passe</label>
+          {{ form.password2 }}
+        </div>
+
+      </div>
+      <div class="w-1/2 h-[50px] my-4 flex justify-center items-center ml-auto">
+        <button id="btn" class="bg-[#FF0000] w-full h-full text-white rounded-xl font-[600] text-[14px]">
+          S'inscrire
+        </button>
+        <span class="loader" id="spinner"></span>
+      </div>
+    </form>
+  </section>
+  <section class="mt-[50px]">
+    <p class="text-[12px] text-[#343A40] text-justify">La création d'un compte d'un compte participant implique que vous aviez accepté les <span class="font-[600]">conditions d'utilisation</span> et reconnaissiez avoir lu la <span class="font-[600]">politique de confidentialité</span> de Event. Ceci porte des informations concernant la collecte de données.
+    </p>
+  </section>
+</div>
+
+<script>
+  const form = document.getElementById('form');
+  const spinner = document.getElementById('spinner');
+  const btn = document.getElementById('btn');
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    btn.style.display = 'none';
+    spinner.style.display = 'block';
+    form.submit();
+  });
+
+  window.addEventListener('pageshow', (event) => {
+    // Vérifiez si la page est chargée depuis le cache
+    if (event.persisted) {
+      // Masquez le spinner
+      spinner.style.display = 'none';
+      // Affichez le bouton
+      btn.style.display = 'block';
+    }
+  });
+</script>
+{% endblock %}

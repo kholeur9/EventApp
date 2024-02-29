@@ -1,0 +1,116 @@
+{% extends 'participant.html' %}
+
+{% block title %}Informations{% endblock %}
+
+{% block content %}
+<style>
+  .form-control {
+    border: 1px solid lightgray;
+    border-radius: .25rem;
+    font-size: 1rem;
+  }
+  place-holder {
+    color: #ced4da;
+  }
+  .loader {
+  margin: 10px 0;
+  width: 35px;
+  height: 35px;
+  border: 4px solid #FF0000;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: none;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+  }
+
+  @keyframes rotation {
+  0% {
+      transform: rotate(0deg);
+     }
+  100% {
+      transform: rotate(360deg);
+     }
+  }
+</style>
+
+<div class="mx-2.5 my-2.5 p-1.5">
+  <p class="text-[13px] text-gray-400">Vous pouvez modifier vos informations de compte ici. Toutes fois, pour assurer la securité de votre compte, et des billets que vous achetez, la modification se fera une fois tous les 30 jours.</p>
+</div>
+<div class="mx-2.5 my-1.5 p-1.5">
+  <span class="text-[20px] text-gray-500">Ajouter, modifier...</span>
+</div>
+{% if success %}
+<div class="w-full mx-2.5 my-1.5 p-1.5">
+  <span class="text-center text-[13px] text-green-500">Informations modifiées avec succès.</span>
+</div>
+{% endif %}
+<div class="mx-2.5 p-1.5">
+  <form id='form' action="" method="post" class="flex flex-col gap-6">
+    {% csrf_token %}
+    <div class="flex flex-col">
+      <label for="nom" class="text-gray-500">Adresse e-mail</label>
+      {{ form.email }}
+    </div>
+    <div class="flex flex-col">
+      <label for="nom" class="text-gray-500">Prenom</label>
+      {{ form.first_name }}
+    </div>
+    <div class="flex flex-col">
+      <label for="nom" class="text-gray-500">Nom</label>
+      {{ form.last_name }}
+    </div>
+    <div class="flex flex-col">
+      <label for="phone" class="text-[14px] text-gray-700">Numéro de téléphone</label>
+      {{ form.phone }}
+    </div>
+    <div class="flex flex-col">
+      <label for="address" class="text-[14px] text-gray-700">Adresse de résidence</label>
+      {{ form.address }}
+    </div>
+    <div class="grid grid-cols-2 gap-2.5">
+      <div class="flex flex-col">
+        <label for="country" class="text-[14px] text-gray-700">Pays</label>
+        {{ form.country }}
+      </div>
+      <div class="flex flex-col">
+        <label for="city" class="text-[14px] text-gray-700">Ville</label>
+        {{ form.city }}
+      </div>
+    </div>
+    <div class="flex flex-col">
+      <label for="date_birth" class="text-[14px] text-gray-700">Date de naissance</label>
+      {{ form.date_birth }}
+    </div>
+    <div class="w-full h-[50px] my-2.5 flex justify-center items-center ml-auto">
+      <button id="btn" class="w-full bg-[#ff0000] text-white rounded-md py-4 px-4 hover:bg-red-500 font-[600]">
+        Enregistrer
+      </button>
+      <span class="loader" id="spinner"></span>
+    </div>
+  </form>
+</div>
+<script>
+  const form = document.getElementById('form');
+  const spinner = document.getElementById('spinner');
+  const btn = document.getElementById('btn');
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    btn.style.display = 'none';
+    spinner.style.display = 'block';
+    form.submit();
+  });
+
+  window.addEventListener('pageshow', (event) => {
+    // Vérifiez si la page est chargée depuis le cache
+    if (event.persisted) {
+      // Masquez le spinner
+      spinner.style.display = 'none';
+      // Affichez le bouton
+      btn.style.display = 'block';
+    }
+  });
+
+</script>
+{% endblock %}

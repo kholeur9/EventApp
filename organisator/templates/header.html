@@ -1,0 +1,20 @@
+{% load static %}
+
+<header>
+  <div class="flex px-[20px] py-[14px] border-b-[0.5px] border-gray-300 items-center h-[50px] overflow-hidden">
+    <span class="material-symbols-outlined">
+      {% if back == 'etape-1' %}
+      <a href="{% url 'organisator:etape-1' %}">
+        arrow_back
+      </a>
+      {% else %}
+      <a href="{% url 'index' %}">
+        arrow_back
+      </a>
+      {% endif %}
+    </span>
+    <p class="text-center flex justify-center items-center mx-auto">
+      <img src="{% static 'img/event.svg' %}" alt="Logo Event" class="w-[180px] h-[50px] object-cover"/>
+    </p>
+  </div>
+</header>

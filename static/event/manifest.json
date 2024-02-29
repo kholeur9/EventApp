@@ -1,0 +1,16 @@
+{
+  "name": "Event Gabon",
+  "short_name": "Event",
+  "description": "Application web d'achat de billets numériques en ligne.",
+  "start_url": "",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "icons": [
+    {
+      "src": "/static/img/logo-pwa-3.png",
+      "sizes": "500x500",
+      "type": "image/png"
+    }
+  ]
+}

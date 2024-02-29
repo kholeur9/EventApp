@@ -1,0 +1,47 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="{% static 'event/css/base.css' %}">
+    {% tailwind_css %}
+    <script src="{% static 'fontawesomefree/js/fontawesome.js' %}"></script>
+    <script src="{% static 'fontawesomefree/js/solid.js' %}"></script>
+    <script src="{% static 'fontawesomefree/js/brands.js' %}"></script>
+    <script src="{% static 'fontawesomefree/js/regular.js' %}"></script>
+    <title>Crédits</title>
+  </head>
+  <body class="p-[20px] flex flex-col gap-2.5">
+    <img src="{% static 'img/logo-event.svg' %}" class="w-[100px] h-[60px] object-cover" />
+      <h1 class="text-[26px] font-[500] text-start">Crédits</h1>
+    <p class="text-[12px]">Merci à tous les créateurs talentueux qui ont contribué aux éléments visuels et ressources utilisés dans cette application. Veuillez trouver ci-dessous les détails d'attribution pour chaque élément :</p>
+    <section class="flex flex-col gap-2.5 my-2.5">
+      <h2 class="text-[16px] font-extrabold">Icônes</h2>
+      <ul class="flex flex-col gap-2.5">
+        <li>
+          <p class="font-[600] text-[14px]">
+            Google icônes
+          </p>
+          <p class="font-[500] text-[12px]">
+            Auteur : <a href="https://www.flaticon.com/fr/icones-gratuites/google" title="google icônes" class="underline">Google icônes créées par Freepik - Flaticon</a>
+          </p>
+        </li>
+        <li>
+          <p class="font-[600] text-[14px]">
+            Mac icônes
+          </p>
+          <p class="font-[500] text-[12px]">
+            Auteur : <a href="https://www.flaticon.com/fr/icones-gratuites/mac" title="mac icônes" class="underline">Mac icônes créées par Hight Quality Icons - Flaticon</a>
+          </p>
+        </li>
+      </ul>
+    </section>
+  </body>
+</html>

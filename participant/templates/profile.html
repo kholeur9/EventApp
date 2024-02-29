@@ -1,0 +1,62 @@
+{% extends 'participant.html' %}
+
+{% block title %}Accueil | Participant{% endblock %}
+
+{% block content %}
+{% include 'navigation.html' %}
+<section class="my-[10px] px-[20px] flex flex-col">
+  {% if participant.user.first_name %}
+<h1 class="font-[700] text-[20px]">Salut, {{ participant.user.first_name }}</h1>
+  {% else %}
+  <h1 class="font-[600] text-[20px]">Hey, votre prénom et nom ?</h1>
+  <span class="text-[12px]">Informations très importantes, <a href="{% url 'participant:profile-user' %}" class="underline text-[#ff0000]">cliquez-ici.</a></span>
+  {% endif %}
+</section>
+<div class="my-[10px]">
+  <h1 class="text-[20px] font-[600] text-gray-600 ml-[20px]">Événements confirmés</h1>
+  <div class="swiper w-full">
+    
+    <div class="swiper-wrapper">
+      {% for event in events_confirmed %}
+      <div class="swiper-slide w-[300px] ml-[20px]">
+        
+        <div class="flex flex-col mt-[10px]">
+          <p class="text-[12px] text-[#ff0000] font-[500] my-0">{{ event.start_datetime|date:'l d F Y'|upper }}. {{ event.start_datetime|date:'H:i' }}
+          </p>
+          <div class="flex flex-row items-center space-y-0 gap-1.5">
+            <i class="fa fa-map-marker text-[16px] text-[#0466C8]"></i>
+            <p class="my-0 text-[20px] font-[600]">{{ event.location }}</p>
+          </div>
+        </div>
+        <div class="relative flex flex-col w-full h-[200px] rounded-lg overflow-hidden">
+          <img src="{{ event.image.url }}" alt="{{ event.title }}" class="w-[100%] h-[100%] object-cover filter"/>
+          <div class="absolute bottom-0 flex flex-row justify-between items-center p-[10px] w-full">
+            <div class="absolute bg-black w-full h-full filter blur-sm opacity-50"></div>
+            <div class="flex flex-col text-white z-10">
+              <span class="font-[600]">{{ event.title }}</span>
+              <span class="text-[12px]">Organiser par : {{ event.organisator }}</span>
+            </div>
+            <a href="{% url 'evenement:detail_event' event.id %}" class="z-10 py-[5px] px-[10px] font-[600] rounded-full bg-gray-400 text-white text-[14px] flex items-center">Voir plus</a>
+        </div>
+      </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block script %}
+<script>
+  const swiper = new Swiper('.swiper', {
+    // Optional parameters
+    direction: 'horizontal',
+    loop: false,
+    spaceBetween: 10,
+    slidesPerView: 'auto',
+    centeredSlides: false,
+    freeMode: true,
+  });
+</script>
+{% endblock %}

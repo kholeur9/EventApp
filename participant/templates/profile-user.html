@@ -1,0 +1,89 @@
+{% extends 'participant.html' %}
+{% load static %}
+
+{% block title %}
+Participant | Profile
+{% endblock %}
+
+{% block content %}
+<section class="my-[10px] px-[20px] flex flex-row items-center justify-between">
+  <div class="flex flex-row items-center">
+    <div class="w-[80px] h-[80px] rounded-full border border-1 border-gray">
+      <img src="{% static 'img/logo-event.svg' %}" alt="Logo Event" class="w-full h-full object-cover"/>
+    </div>
+    <div class="ml-[10px] flex flex-col gap-0.5">
+      <span class="font-[600]">{{ participant.user.first_name }}</span>
+      <span class="font-normal text-[11px]">
+      {{ participant.user.email }}
+      </span>
+    </div>
+  </div>
+  <a href="{% url 'participant:informations' participant.id %}" class="flex items-center">
+    <i class="fa-regular fa-pen-to-square text-[20px]"></i>
+  </a>
+</section>
+<section class="my-[10px]">
+  <div class="flex flex-row gap-2.5 m-[20px] p-[20px] rounded-xl shadow-sm bg-red-100">
+    <div class="flex flex-col items-center">
+      <span class="font-[600] text-[#FF0000]">0</span>
+      <span class="text-[12px] text-[#FF0000]">Organisation(s) suivie(s)</span>
+    </div>
+    <div>
+      
+    </div>
+  </div>
+</section>
+<section class="my-[10px]">
+  <div class="flex flex-col mx-[20px] px-[10px] py-[20px] rounded-xl border border-1 border-gray-100">
+    <ul class="flex flex-col gap-8">
+      <a href="" class="flex flex-row justify-between items-center">
+        <li class="flex flex-row items-center">
+          <i class="fa fa-person-circle-plus text-[20px]"></i>
+          <span class="ml-[10px] text-[14px]">Invitations</span>
+        </li>
+        <i class="fa-solid fa-chevron-right font-[500] text-gray-500"></i>
+      </a>
+      <a href="" class="flex flex-row justify-between items-center">
+        <li class="flex flex-row items-center">
+          <i class="fa fa-list-check text-[20px]"></i>
+          <span class="ml-[10px] text-[14px]">Centres d'intérêt</span>
+        </li>
+        <i class="fa-solid fa-chevron-right font-[500] text-gray-500"></i>
+      </a>
+      <a href="" class="flex flex-row justify-between items-center">
+        <li class="flex flex-row items-center">
+          <i class="fa-regular fa-clock text-[20px]"></i>
+          <span class="ml-[10px] text-[14px]">Historique de vos achats</span>
+        </li>
+        <i class="fa-solid fa-chevron-right font-[500] text-gray-500"></i>
+      </a>
+      <a href="" class="flex flex-row justify-between items-center">
+        <li class="flex flex-row items-center">
+          <i class="fa-regular fa-circle-question text-[20px]"></i>
+          <span class="ml-[10px] text-[14px]">Assistance</span>
+        </li>
+        <i class="fa fa-chevron-right font-[500] text-gray-500"></i>
+      </a>
+      <a href="" class="flex flex-row justify-between items-center">
+      <li class="flex flex-row items-center">
+        <i class="fa fa-gear text-[20px]"></i>
+        <span class="ml-[10px] text-[14px]">Paramètres</span>
+      </li>
+        <i class="fa fa-chevron-right font-[500] text-gray-500"></i>
+      </a>
+      <a href="" class="flex flex-row justify-between items-center">
+        <li class="flex flex-row items-center">
+          <i class="fa-solid fa-book text-[20px]"></i>
+          <span class="ml-[10px] text-[14px]">Conditions d'utilisation et politiques de confidentialités</span>
+        </li>
+        <i class="fa fa-chevron-right font-[500] text-gray-500"></i>
+      </a>
+    </ul>
+  </div>
+</section>
+<div class="mx-[20px]">
+  <a href="{% url 'participant:logout' %}" class="block px-4 py-4 rounded-lg bg-red-100 text-[#FF0000] text-[14px] border border-1 border-[#FF0000] text-center items-center"><i class="fa fa-power-off mr-2.5 text-[20px]"></i>Déconnexion</a>
+</div>
+<script src="{% static 'participant/js/pop-up.js' %}"></script>
+<script src="{% static 'participant/js/profile-user.js' %}"></script>
+{% endblock %}

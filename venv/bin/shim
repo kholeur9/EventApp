@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+export NODE_PATH='/home/runner/Event/venv/lib/node_modules'
+export NPM_CONFIG_PREFIX='/home/runner/Event/venv'
+export npm_config_prefix='/home/runner/Event/venv'
+exec '/home/runner/Event/venv/bin/node' "$@"

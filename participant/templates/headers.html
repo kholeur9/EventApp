@@ -1,0 +1,18 @@
+{% load static %}
+
+<div class="flex flex-row justify-between px-[20px] py-[14px] items-center h-[50px] overflow-hidden w-full">
+  <!--<a href="javascript:void(0);" class="flex items-center" id="back">
+    <i class="fa fa-arrow-left text-[20px]"></i>
+  </a>-->
+  <a href="{% url 'participant:home_view' %}">
+    <img src="{% static 'img/logo-event.svg' %}" alt="Logo Event" class="w-[120px] h-[50px] object-cover"/>
+  </a>
+  <div class="flex flex-row gap-4">
+    <a href="{% url 'participant:profile-user' %}">
+      <i class="fa-regular fa-user-circle text-[20px]"></i>
+    </a>
+    <button>
+      <i class="fa fa-search text-[20px]"></i>
+    </button>
+  </div>
+</div>
